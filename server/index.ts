@@ -1,11 +1,19 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
 import { Application } from 'express';
+import { registerGeneratorTools, registerQueryTools, registerScaffoldTools, registerValidatorTools } from "../tools/index.js";
+
 
 const server = new McpServer({
     name: "Payload CMS MCP",
     version: "0.1.0"
 });
+
+registerGeneratorTools(server);
+registerQueryTools(server);
+registerScaffoldTools(server);
+registerValidatorTools(server);
+
 
 const connections = new Map<string, SSEServerTransport>();
 

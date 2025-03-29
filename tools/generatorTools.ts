@@ -1,39 +1,30 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
-import { 
-  getGenerator,
-  GeneratorType,
-} from '../generators/index.js';
+import { getGenerator, GeneratorType } from '../generators/index.js';
 
-// Register generator tools with the MCP server
 export function registerGeneratorTools(server: McpServer) {
-  // General template generator
   server.tool(
     'generate_template',
     {
       type: z.enum([
-        'collection', 
-        'field', 
-        'global', 
-        'config', 
-        'access-control', 
-        'hook', 
-        'endpoint', 
-        'plugin', 
-        'block', 
+        'collection',
+        'field',
+        'config',
+        'access-control',
+        'hook',
+        'endpoint',
+        'plugin',
+        'block',
         'migration',
-        'component',
-        'schema'
-      ]),
-      options: z.record(z.any()).optional().default({}),
+        'component'
+      ]).describe('Type of component to generate'),
+      options: z.record(z.any()).optional().default({}).describe('Configuration options for the generator'),
     },
     async ({ type, options }) => {
       try {
-        // Map the API type names to the generator type names
         const generatorTypeMap: Record<string, GeneratorType> = {
           'collection': 'collection',
           'field': 'field',
-          'global': 'global',
           'config': 'config',
           'access-control': 'accessControl',
           'hook': 'hook',
@@ -42,16 +33,23 @@ export function registerGeneratorTools(server: McpServer) {
           'block': 'block',
           'migration': 'migration',
           'component': 'component',
-          'schema': 'schema'
         };
-        
-        // Get the generator and generate the code
+
+        if (!generatorTypeMap[type]) {
+          return {
+            content: [
+              {
+                type: 'text',
+                text: `Unsupported generator type: ${type}`,
+              },
+            ],
+            isError: true,
+          };
+        }
+
         const generator = await getGenerator(generatorTypeMap[type]);
-        
-        // Create options object that satisfies the specific generator
-        // We're forced to use any here because each generator has different options
         const result = await generator(options as any);
-        
+
         return {
           content: [
             {

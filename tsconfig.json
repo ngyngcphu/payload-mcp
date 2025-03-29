@@ -2,8 +2,8 @@
     "compilerOptions": {
         "target": "ESNext",
         "module": "NodeNext",
-        "moduleResolution": "NodeNext",
-        "outDir": "./build",
+        "moduleResolution": "nodenext",
+        "outDir": "./dist",
         "rootDir": ".",
         "strict": true,
         "esModuleInterop": true,
