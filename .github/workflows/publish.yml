@@ -12,16 +12,38 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
       - name: Install dependencies
         run: bun install
       - name: Build
         run: bun run build
+      - name: Setup Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+      - name: Bump version
+        run: |
+          # Get current version from package.json
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          # Split version into parts
+          IFS='.' read -ra VERSION_PARTS <<< "$CURRENT_VERSION"
+          # Increment patch version
+          VERSION_PARTS[2]=$((VERSION_PARTS[2] + 1))
+          # Join parts back together
+          NEW_VERSION="${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.${VERSION_PARTS[2]}"
+          # Update package.json with new version
+          bun x json -I -f package.json -e "this.version=\"$NEW_VERSION\""
+          echo "New version: $NEW_VERSION"
       - name: Create .npmrc file
         run: |
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
           echo "registry=https://registry.npmjs.org/" >> .npmrc
       - name: Publish
         run: bun publish --access public
+      - name: Commit version bump
+        run: |
+          git add package.json
+          git commit -m "Bump version [skip ci]"
+          git push
