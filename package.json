@@ -45,7 +45,8 @@
     },
     "scripts": {
         "start": "NODE_NO_WARNINGS=1 node --loader ts-node/esm index.ts",
-        "build": "rm -rf dist && bun build index.ts --outdir=dist --target=node && node -e \"require('fs').chmodSync('dist/index.js', '755')\"",
+        "build": "rm -rf dist && tsc",
+        "postbuild": "node -e \"const fs=require('fs');const f='dist/index.js';fs.writeFileSync(f,'#!/usr/bin/env node\\n'+fs.readFileSync(f));fs.chmodSync(f,'755');\"",
         "prepublishOnly": "npm run build"
     }
 }
