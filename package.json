@@ -1,11 +1,35 @@
 {
-    "name": "payload-mcp",
+    "name": "@ngyngcphu/payload-mcp",
     "version": "0.1.0",
-    "main": "index.js",
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "description": "",
+    "description": "A powerful Model Context Protocol (MCP) server for Payload CMS that enables AI assistants to help you develop, manage, and extend your Payload CMS projects",
+    "main": "dist/index.js",
+    "type": "module",
+    "bin": {
+        "payload-mcp": "./dist/index.js"
+    },
+    "files": [
+        "dist",
+        "README.md",
+        "LICENSE"
+    ],
+    "keywords": [
+        "payload-cms",
+        "mcp",
+        "ai",
+        "code-generation",
+        "scaffolding",
+        "validation"
+    ],
+    "author": "ngyngcphu",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ngyngcphu/payload-mcp.git"
+    },
+    "bugs": {
+        "url": "https://github.com/ngyngcphu/payload-mcp/issues"
+    },
+    "homepage": "https://github.com/ngyngcphu/payload-mcp#readme",
     "dependencies": {
         "@modelcontextprotocol/sdk": "^1.7.0",
         "cors": "^2.8.5",
@@ -19,9 +43,9 @@
         "ts-node": "^10.9.2",
         "typescript": "^5.8.2"
     },
-    "type": "module",
     "scripts": {
         "start": "NODE_NO_WARNINGS=1 node --loader ts-node/esm index.ts",
-        "build": "rm -rf dist && bun build index.ts --outdir=dist --target=node && node -e \"require('fs').chmodSync('dist/index.js', '755')\""
+        "build": "rm -rf dist && bun build index.ts --outdir=dist --target=node && node -e \"require('fs').chmodSync('dist/index.js', '755')\"",
+        "prepublishOnly": "npm run build"
     }
 }

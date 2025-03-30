@@ -31,27 +31,32 @@ This project implements an MCP server that can be run locally to provide AI assi
 
 ### Installation
 
-1. Clone the repository:
+1. Install the package:
    ```bash
-   git clone https://github.com/yourusername/payload-mcp.git
-   cd payload-mcp
+   npm install -g @ngyngcphu/payload-mcp
    ```
 
-2. Install dependencies:
-   ```bash
-   npm install
-   # or with Bun (recommended)
-   bun install
+2. Configure your MCP client (e.g., Cursor) by adding this to your `mcp.json`:
+   ```json
+   {
+     "mcpServers": {
+       "@ngyngcphu/payload-mcp": {
+         "command": "npx",
+         "args": ["@ngyngcphu/payload-mcp"]
+       }
+     }
+   }
    ```
 
-3. Start the server:
-   ```bash
-   npm start
-   # or with Bun
-   bun run start
-   ```
+3. The server will start automatically when needed by your MCP client. The default port is 3001.
 
-The server will start on port 3001 by default. You can now connect your AI assistant to the MCP server by configuring it to use the endpoint: `http://localhost:3001/`.
+### Manual Start (Optional)
+
+If you want to start the server manually:
+
+```bash
+npx @ngyngcphu/payload-mcp
+```
 
 ## Tool Reference
 
@@ -210,7 +215,6 @@ A typical workflow using Payload MCP might look like this:
 
 ## Future Plans
 
-- Cloud-hosted version at mcp.so (coming soon)
 - Additional generators for more Payload CMS component types
 - Integration with popular IDEs
 - Support for GraphQL query generation and validation
