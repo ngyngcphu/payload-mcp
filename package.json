@@ -1,52 +1,56 @@
 {
-    "name": "@ngyngcphu/payload-mcp",
-    "version": "0.1.0",
-    "description": "A powerful Model Context Protocol (MCP) server for Payload CMS that enables AI assistants to help you develop, manage, and extend your Payload CMS projects",
-    "main": "dist/index.js",
-    "type": "module",
-    "bin": {
-        "payload-mcp": "./dist/index.js"
-    },
-    "files": [
-        "dist",
-        "README.md",
-        "LICENSE"
-    ],
-    "keywords": [
-        "payload-cms",
-        "mcp",
-        "ai",
-        "code-generation",
-        "scaffolding",
-        "validation"
-    ],
-    "author": "ngyngcphu",
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/ngyngcphu/payload-mcp.git"
-    },
-    "bugs": {
-        "url": "https://github.com/ngyngcphu/payload-mcp/issues"
-    },
-    "homepage": "https://github.com/ngyngcphu/payload-mcp#readme",
-    "dependencies": {
-        "@modelcontextprotocol/sdk": "^1.7.0",
-        "cors": "^2.8.5",
-        "express": "^4.21.2",
-        "zod": "^3.24.2"
-    },
-    "devDependencies": {
-        "@types/cors": "^2.8.17",
-        "@types/express": "^5.0.1",
-        "@types/node": "^22.13.13",
-        "ts-node": "^10.9.2",
-        "typescript": "^5.8.2"
-    },
-    "scripts": {
-        "start": "NODE_NO_WARNINGS=1 node --loader ts-node/esm index.ts",
-        "build": "rm -rf dist && tsc",
-        "postbuild": "node -e \"const fs=require('fs');const f='dist/index.js';fs.writeFileSync(f,'#!/usr/bin/env node\\n'+fs.readFileSync(f));fs.chmodSync(f,'755');\"",
-        "prepublishOnly": "npm run build"
-    }
+  "name": "@ngyngcphu/payload-mcp",
+  "version": "0.1.0",
+  "description": "A powerful Model Context Protocol (MCP) server for Payload CMS that enables AI assistants to help you develop, manage, and extend your Payload CMS projects",
+  "main": "dist/index.js",
+  "type": "module",
+  "bin": {
+    "payload-mcp": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "payload-cms",
+    "mcp",
+    "ai",
+    "code-generation",
+    "scaffolding",
+    "validation"
+  ],
+  "author": "ngyngcphu",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngyngcphu/payload-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ngyngcphu/payload-mcp/issues"
+  },
+  "homepage": "https://github.com/ngyngcphu/payload-mcp#readme",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.7.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.13.13",
+    "@typescript-eslint/parser": "^5.0.1",
+    "eslint": "^8.52.0",
+    "prettier": "^3.1.0",
+    "prettier-eslint": "^16.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^4.4.4"
+  },
+  "scripts": {
+    "start": "NODE_NO_WARNINGS=1 node --loader ts-node/esm index.ts",
+    "build": "rm -rf dist && tsc",
+    "postbuild": "node -e \"const fs=require('fs');const f='dist/index.js';fs.writeFileSync(f,'#!/usr/bin/env node\\n'+fs.readFileSync(f));fs.chmodSync(f,'755');\"",
+    "prepublishOnly": "npm run build"
+  }
 }
