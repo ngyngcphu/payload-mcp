@@ -1,4 +1,7 @@
 # Payload MCP
+[![In Progress](https://img.shields.io/badge/status-in%20progress-yellow.svg)](https://github.com/your-username/payload-mcp)
+> ⚠️ **Work in Progress**  
+> This repository is under active development and not yet feature-complete. APIs, configurations, and CLI commands may change without notice. Use at your own risk!
 
 A powerful Model Context Protocol (MCP) server for Payload CMS that enables AI assistants to help you develop, manage, and extend your Payload CMS projects.
 
